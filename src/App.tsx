@@ -9,9 +9,13 @@ import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
+import Orders from "./pages/Orders";
+import Chat from "./pages/Chat";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import CartSidebar from "./components/cart/CartSidebar";
+import CheckoutForm from "./components/checkout/CheckoutForm";
 import { Product, CartItem } from "./utils/types";
 
 const queryClient = new QueryClient();
@@ -19,6 +23,7 @@ const queryClient = new QueryClient();
 const App = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const handleAddToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prev => {
@@ -57,10 +62,13 @@ const App = () => {
   };
 
   const handleCheckout = () => {
-    // This would typically redirect to a checkout page or process
-    console.log('Processing checkout with items:', cartItems);
-    setCartItems([]);
     setIsCartOpen(false);
+    setIsCheckoutOpen(true);
+  };
+
+  const handleCheckoutComplete = () => {
+    setCartItems([]);
+    setIsCheckoutOpen(false);
   };
 
   return (
@@ -78,11 +86,22 @@ const App = () => {
             onRemoveItem={handleRemoveItem}
             onCheckout={handleCheckout}
           />
-          <main>
+          <main className={isCheckoutOpen ? 'relative' : ''}>
+            {isCheckoutOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-background p-4">
+                <CheckoutForm 
+                  cartItems={cartItems}
+                  onCheckoutComplete={handleCheckoutComplete}
+                />
+              </div>
+            )}
             <Routes>
               <Route path="/" element={<Index onAddToCart={handleAddToCart} />} />
               <Route path="/menu" element={<Products onAddToCart={handleAddToCart} />} />
               <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/order-confirmation" element={<OrderConfirmation />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
