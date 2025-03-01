@@ -12,6 +12,7 @@ interface ProductCardProps {
   onToggleFavorite?: (productId: string) => void;
   className?: string;
   isFavorite?: boolean;
+  style?: React.CSSProperties;
 }
 
 const ProductCard = ({ 
@@ -19,7 +20,8 @@ const ProductCard = ({
   onAddToCart, 
   onToggleFavorite, 
   className,
-  isFavorite = false
+  isFavorite = false,
+  style
 }: ProductCardProps) => {
   return (
     <div 
@@ -27,6 +29,7 @@ const ProductCard = ({
         "group relative flex flex-col overflow-hidden rounded-xl bg-white transition-all duration-300 hover:shadow-elevated",
         className
       )}
+      style={style}
     >
       <div className="relative aspect-square overflow-hidden">
         <img 
@@ -37,14 +40,14 @@ const ProductCard = ({
         
         {product.featured && (
           <div className="absolute left-4 top-4 rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white">
-            Featured
+            Рекомендуем
           </div>
         )}
         
         <button 
           onClick={() => onToggleFavorite && onToggleFavorite(product.id)}
           className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-gray-700 transition-all hover:bg-white hover:text-red-500"
-          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          aria-label={isFavorite ? "Удалить из избранного" : "Добавить в избранное"}
         >
           <Heart size={18} className={cn(isFavorite && "fill-red-500 text-red-500")} />
         </button>
@@ -88,14 +91,14 @@ const ProductCard = ({
         )}
         
         <div className="mt-4 flex items-center justify-between">
-          <div className="text-base font-semibold">${product.price.toFixed(2)}</div>
+          <div className="text-base font-semibold">{product.price.toFixed(2)} ₽</div>
           
           <Button 
             size="sm" 
             className="rounded-full" 
             onClick={() => onAddToCart && onAddToCart(product)}
           >
-            <Plus size={16} className="mr-1" /> Add
+            <Plus size={16} className="mr-1" /> Добавить
           </Button>
         </div>
       </div>

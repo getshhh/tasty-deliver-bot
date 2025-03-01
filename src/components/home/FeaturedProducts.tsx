@@ -21,10 +21,10 @@ const FeaturedProducts = ({ products, onAddToCart }: FeaturedProductsProps) => {
   const handleToggleFavorite = (productId: string) => {
     setFavorites(prev => {
       if (prev.includes(productId)) {
-        toast.success("Removed from favorites");
+        toast.success("Удалено из избранного");
         return prev.filter(id => id !== productId);
       } else {
-        toast.success("Added to favorites");
+        toast.success("Добавлено в избранное");
         return [...prev, productId];
       }
     });
@@ -32,7 +32,7 @@ const FeaturedProducts = ({ products, onAddToCart }: FeaturedProductsProps) => {
 
   const handleAddToCart = (product: Product) => {
     onAddToCart(product);
-    toast.success(`${product.name} added to cart`);
+    toast.success(`${product.name} добавлено в корзину`);
   };
 
   return (
@@ -40,9 +40,9 @@ const FeaturedProducts = ({ products, onAddToCart }: FeaturedProductsProps) => {
       <div className="container">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Featured Dishes</h2>
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Популярные блюда</h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Our most popular culinary creations, selected just for you
+              Наши самые популярные кулинарные творения, выбранные специально для вас
             </p>
           </div>
           
@@ -51,7 +51,7 @@ const FeaturedProducts = ({ products, onAddToCart }: FeaturedProductsProps) => {
             className="group flex items-center text-primary"
             onClick={() => navigate('/menu')}
           >
-            View All Menu
+            Посмотреть все меню
             <ArrowRight size={16} className="ml-1 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>

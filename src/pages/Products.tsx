@@ -48,10 +48,10 @@ const Products = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) 
   const handleToggleFavorite = (productId: string) => {
     setFavorites(prev => {
       if (prev.includes(productId)) {
-        toast.success("Removed from favorites");
+        toast.success("Удалено из избранного");
         return prev.filter(id => id !== productId);
       } else {
-        toast.success("Added to favorites");
+        toast.success("Добавлено в избранное");
         return [...prev, productId];
       }
     });
@@ -59,16 +59,16 @@ const Products = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) 
 
   const handleAddToCart = (product: Product) => {
     onAddToCart(product);
-    toast.success(`${product.name} added to cart`);
+    toast.success(`${product.name} добавлено в корзину`);
   };
 
   const filterOptions = [
-    { id: 'all', label: 'All' },
-    { id: 'pizza', label: 'Pizza' },
-    { id: 'burgers', label: 'Burgers' },
-    { id: 'asian', label: 'Asian' },
-    { id: 'healthy', label: 'Healthy' },
-    { id: 'desserts', label: 'Desserts' },
+    { id: 'all', label: 'Все' },
+    { id: 'pizza', label: 'Пицца' },
+    { id: 'burgers', label: 'Бургеры' },
+    { id: 'asian', label: 'Азиатская' },
+    { id: 'healthy', label: 'Здоровая еда' },
+    { id: 'desserts', label: 'Десерты' },
   ];
 
   const applyFilter = (filter: string) => {
@@ -87,17 +87,17 @@ const Products = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) 
     <div className="min-h-screen bg-background px-4 py-24 sm:px-6 lg:px-8">
       <div className="container mx-auto">
         <div className="mb-10 space-y-4">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Our Menu</h1>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Наше меню</h1>
           <p className="max-w-3xl text-lg text-muted-foreground">
-            Explore our diverse menu featuring dishes crafted with the finest ingredients. 
-            From comfort classics to innovative creations, there's something for everyone.
+            Исследуйте наше разнообразное меню с блюдами, приготовленными из лучших ингредиентов. 
+            От домашней классики до инновационных гастрономических решений — у нас есть блюда на любой вкус.
           </p>
           
           <div className="flex flex-col gap-4 sm:flex-row">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search by name, ingredient, or cuisine"
+                placeholder="Поиск по названию, ингредиентам или кухне"
                 className="pl-10"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -122,15 +122,15 @@ const Products = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) 
         {displayedProducts.length === 0 ? (
           <div className="flex min-h-[300px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center">
             <Filter className="mb-4 h-12 w-12 text-muted-foreground" />
-            <h2 className="text-xl font-semibold">No results found</h2>
+            <h2 className="text-xl font-semibold">Ничего не найдено</h2>
             <p className="mt-2 text-muted-foreground">
-              Try adjusting your search or filter to find what you're looking for.
+              Попробуйте изменить запрос или фильтры, чтобы найти то, что вы ищете.
             </p>
             <Button className="mt-4" onClick={() => {
               setSearchTerm('');
               applyFilter('all');
             }}>
-              Clear filters
+              Сбросить фильтры
             </Button>
           </div>
         ) : (

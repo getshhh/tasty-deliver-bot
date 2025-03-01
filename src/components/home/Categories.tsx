@@ -16,10 +16,10 @@ const Categories = ({ categories }: CategoriesProps) => {
       <div className="container">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Browse By Category
+            Категории блюд
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-muted-foreground">
-            Discover our diverse range of culinary options, categorized for your convenience.
+            Откройте для себя разнообразие наших кулинарных предложений, удобно разделенных по категориям
           </p>
         </div>
 
@@ -45,7 +45,7 @@ const Categories = ({ categories }: CategoriesProps) => {
               
               <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                 <h3 className="text-lg font-medium">{category.name}</h3>
-                <p className="text-sm font-light">{category.count} items</p>
+                <p className="text-sm font-light">{category.count} блюд</p>
               </div>
             </div>
           ))}
