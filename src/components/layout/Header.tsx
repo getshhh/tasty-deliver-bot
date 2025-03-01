@@ -11,9 +11,10 @@ interface NavLinkProps {
   to: string;
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void; // Add this line to fix the TypeScript error
 }
 
-const NavLink = ({ to, children, className }: NavLinkProps) => {
+const NavLink = ({ to, children, className, onClick }: NavLinkProps) => {
   const location = useLocation();
   const isActive = location.pathname === to;
 
@@ -25,6 +26,7 @@ const NavLink = ({ to, children, className }: NavLinkProps) => {
         isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary',
         className
       )}
+      onClick={onClick}
     >
       {children}
     </Link>
